@@ -11,10 +11,17 @@ CREATE TABLE deals (
 );
 
 
+-- write new script here. used existing refreshdeallist.sh that generates deallist.tsv
+-- grep -v "^<nil>" /Users/brianeggert/deallist.tsv > /Users/brianeggert/deallist_clean.tsv
+
+
+--don't remember why I couldn't make this work from inside the existing psql session
+/*
 psql "host=onchain-analytics.cdzlqpobahpk.us-east-2.rds.amazonaws.com port=5432 user=brian dbname=analytics sslmode=verify-full sslrootcert=$HOME/.rds-us-east-2.pem" \
 -c "\copy deals (DealID, State, Provider, PieceCID, PieceSize, StartEpoch, Price, Verified, ClientID) \
     FROM '/Users/brianeggert/deallist_clean.tsv' \
     WITH (FORMAT csv, DELIMITER E'\t', HEADER true, NULL '<nil>')"
+*/
 
 
 CREATE TABLE clients (
@@ -61,12 +68,6 @@ CREATE TABLE pieces_staging (
 \copy pieces_staging (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag) FROM '/Users/brianeggert/pieces.csv' WITH (FORMAT csv, HEADER true)
 
 
-INSERT INTO pieces
-SELECT *
-FROM pieces_staging
-ON CONFLICT (PieceCID, PrepID, StorageID) DO NOTHING;
-
-
 CREATE TABLE pieces (
     PieceCID    TEXT NOT NULL,
     PieceSize   BIGINT NOT NULL,
@@ -79,11 +80,16 @@ CREATE TABLE pieces (
 );
 
 
+INSERT INTO pieces
+SELECT *
+FROM pieces_staging
+ON CONFLICT (PieceCID, PrepID, StorageID) DO NOTHING;
+
+
 -- This query finds the rows in pieces_staging that were NOT inserted into pieces
 -- because they were duplicates of an existing (PieceCID, PrepID, StorageID).
 -- In other words, it shows you exactly which rows were skipped by
 --   INSERT ... ON CONFLICT DO NOTHING
-
 SELECT ps.*
 FROM pieces_staging ps
 LEFT JOIN pieces p
@@ -93,4 +99,19 @@ LEFT JOIN pieces p
 WHERE p.PieceCID IS NOT NULL;
 
 
+CREATE TABLE storages (
+    StorageID   BIGINT PRIMARY KEY,
+    StorageName TEXT NOT NULL,
+    Type        TEXT,
+    Path        TEXT
+);
 
+
+\copy storages (StorageID, StorageName, Type, Path) FROM '/Users/brianeggert/storages.csv' WITH (FORMAT csv, HEADER false)
+
+
+CREATE TABLE preparations (
+    PrepID    BIGINT PRIMARY KEY,
+    Name      TEXT NOT NULL,
+    StorageID BIGINT REFERENCES storages(StorageID)
+);
