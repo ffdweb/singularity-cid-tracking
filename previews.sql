@@ -35,11 +35,11 @@ analytics=> SELECT * FROM storages LIMIT 3;
 
    
 analytics=> SELECT * FROM preparations LIMIT 3;
- prepid |                                       name                                       | storageid 
---------+----------------------------------------------------------------------------------+-----------
-      1 | 201569_News_Footage_1954_Can_7 false 33822867456 34359738368 1048576 false false |         1
-      4 | The_Story_of_Television false 33822867456 34359738368 1048576 false false        |         4
-    122 | 202086_The_Sound_Of_A_Million false 33822867456 34359738368 1048576 false false  |       122
+ prepid |              name              | storageid 
+--------+--------------------------------+-----------
+      1 | 201569_News_Footage_1954_Can_7 |         1
+      4 | The_Story_of_Television        |         4
+    122 | 202086_The_Sound_Of_A_Million  |       122
 (3 rows)
 
 
