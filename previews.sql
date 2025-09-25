@@ -10,7 +10,7 @@ analytics=> SELECT * FROM deals LIMIT 3;
 analytics=> SELECT * FROM clients LIMIT 3;
  clientid  |               clientaddress               | active | clientowner 
 -----------+-------------------------------------------+--------+-------------
- f02208630 | f1i2reokfclrqls5mkgtbqk5esvj6it7nykv7c57y | t      | PA
+ f02208630 | f1i2reokfclrqls5mkgtbqk5esvj6it7nykv7c57y | f      | PA
  f03091977 | f1hnvljphtrpwb6pxszxoh7k57br7goo33s6b22ry | t      | PA
  f01131298 | f1wp6zoxj7sydnrywvzp276x3gayghi7r6le4tcwy | f      | IA
 (3 rows)
