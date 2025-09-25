@@ -11,10 +11,9 @@ echo "PrepID,Name,StorageID" > "$output_file"
 # Get the full prep list from Singularity
 singularity prep list | awk '
     /^[0-9]+[[:space:]]/ {
-        # First line of a prep block, grab ID and Name
+        # First line of a prep block, grab ID and Name (only $2, not the rest)
         prep_id=$1
         name=$2
-        for (i=3; i<=NF; i++) name=name" "$i
     }
     /^[[:space:]]+[0-9]+[[:space:]]/ {
         # Storage block line, grab StorageID
