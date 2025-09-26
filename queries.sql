@@ -1,4 +1,4 @@
--- piece statuses per provider by preparation
+-- piece statuses per provider by preparation - empty means all deals have always failed
 SELECT 
     p.prepid,
     p.piececid,
