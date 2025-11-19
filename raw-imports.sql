@@ -36,3 +36,22 @@ CREATE TABLE deals_raw (
     Verified      BOOLEAN,
     ClientID      TEXT
 );
+
+CREATE TABLE deals_full (
+    DealID                BIGINT,
+    PieceCID              TEXT,
+    PieceSize             BIGINT,
+    VerifiedDeal          BOOLEAN,
+    Client                TEXT,
+    Provider              TEXT,
+    Label                 TEXT,
+    StartEpoch            BIGINT,
+    EndEpoch              BIGINT,
+    StoragePricePerEpoch  BIGINT,
+    ProviderCollateral    BIGINT,
+    ClientCollateral      BIGINT,
+    SectorNumber          BIGINT,
+    SectorStartEpoch      BIGINT,
+    LastUpdatedEpoch      BIGINT,
+    SlashEpoch            BIGINT
+);
