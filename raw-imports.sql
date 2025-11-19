@@ -13,3 +13,10 @@ CREATE TABLE prep_list_raw (
     SourceStoragePath   TEXT,
     HasOutputStorage    BOOLEAN
 );
+
+CREATE TABLE storages_raw_basic (
+    StorageID      INTEGER,
+    StorageName    TEXT,
+    StorageType    TEXT,
+    StoragePath    TEXT
+);
