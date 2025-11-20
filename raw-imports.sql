@@ -74,4 +74,41 @@ CREATE TABLE collection_35mmstockfootage_raw (
 -- archiveteam_eot2024_voiceofamerica_raw 36367
 -- eot_2024_unt_raw 1577
 -- eot_2024_webrecorder_raw 386
+-- ff_prelinger_raw 1453
 
+CREATE TABLE items_all_unique (
+    identifier TEXT PRIMARY KEY
+);
+
+INSERT INTO items_all_unique (identifier)
+SELECT identifier FROM collection_35mmstockfootage_raw
+UNION
+SELECT identifier FROM collection_legacy_prelinger_raw
+UNION
+SELECT identifier FROM collection_aruba_raw
+UNION
+SELECT identifier FROM us_fbis_raw
+UNION
+SELECT identifier FROM rohingya_archive_raw
+UNION
+SELECT identifier FROM eot_2024_pre_election_raw
+UNION
+SELECT identifier FROM eot_2024_interim_raw
+UNION
+SELECT identifier FROM eot_2024_post_inauguration_raw
+UNION
+SELECT identifier FROM archiveteam_eot2024_usgovernment_raw
+UNION
+SELECT identifier FROM archiveteam_eot2024_voiceofamerica_raw
+UNION
+SELECT identifier FROM eot_2024_unt_raw
+UNION
+SELECT identifier FROM eot_2024_webrecorder_raw
+UNION
+SELECT identifier FROM ff_prelinger_raw;
+
+-- 398791 total
+
+CREATE TABLE unionname_prelinger_union_1 (identifier TEXT PRIMARY KEY);
+
+-- script to extract union contents from parsing _meta.xml filenames uploaded
