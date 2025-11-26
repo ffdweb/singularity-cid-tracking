@@ -70,7 +70,7 @@ CREATE TABLE pieces_staging (
 );
 
 
-\copy pieces_staging (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag) FROM '/Users/brianeggert/pieces.csv' WITH (FORMAT csv, HEADER true)
+\copy pieces_staging (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag) FROM '/Users/brianeggert/workscripts/postgres/pieces.csv' WITH (FORMAT csv, HEADER true)
 
 
 INSERT INTO pieces
