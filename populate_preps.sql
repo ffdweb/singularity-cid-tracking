@@ -14,5 +14,19 @@ CREATE TABLE preparations_staging (
     StorageID BIGINT
 );
 
+-- run db_prep_report.sh
 
-\copy preparations_staging (PrepID, Name, StorageID) FROM '/Users/brianeggert/preparations.csv' WITH (FORMAT csv, HEADER true);
+/*
+\copy preparations_staging (PrepID, Name, StorageID) FROM '/Users/brianeggert/preparations.csv' WITH (FORMAT csv, HEADER true)
+*/
+
+INSERT INTO preparations
+SELECT * FROM preparations_staging
+ON CONFLICT (PrepID) DO NOTHING;
+
+/*
+SELECT ps.*
+FROM preparations_staging ps
+LEFT JOIN preparations p ON ps.PrepID = p.PrepID
+WHERE p.PrepID IS NOT NULL;
+*/
