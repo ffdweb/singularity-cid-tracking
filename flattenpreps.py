@@ -90,6 +90,8 @@ def parse_prep_list(lines):
             current["SourceStoragePath"] = spath
             continue
 
+        # Ignore Output storage details per your request
+
     # Add the last record
     if current:
         rows.append(current)
@@ -109,15 +111,15 @@ def write_csv(rows, outfile="preps_flat.csv"):
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
-    print(f"CSV written to {outfile}")
+    print(f"✅ CSV written to {outfile}")
 
 
 def main():
-    print("Running 'singularity prep list' ...")
+    print("⏳ Running 'singularity prep list' ...")
     lines = run_prep_list()
-    print("Parsing ...")
+    print("⏳ Parsing ...")
     rows = parse_prep_list(lines)
-    print(f"Parsed {len(rows)} preparations.")
+    print(f"📦 Parsed {len(rows)} preparations.")
     write_csv(rows)
 
 
