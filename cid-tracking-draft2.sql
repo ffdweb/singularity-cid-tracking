@@ -13,9 +13,8 @@ CREATE TABLE deals (
 );
 
 
--- write new script here. used existing refreshdeallist.sh that generates deallist.tsv
--- grep -v "^<nil>" /Users/brianeggert/deallist.tsv > /Users/brianeggert/deallist_clean.tsv
-
+-- use existing refreshdeallist.sh to compile master list of 3 providers
+-- use cleanlist.sh to remove <nil> deal IDs
 
 --don't remember why I couldn't make this work from inside the existing psql session
 /*
