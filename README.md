@@ -4,5 +4,3 @@ Very rough working-inpublic scratch space for tracking FFDW data uploading proje
 
 Feel free to email ian@fil.org with any questions
 
-1) refreshdeallist.sh
-2) populate_deals.sh
