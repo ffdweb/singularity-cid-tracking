@@ -1,35 +1,28 @@
---do this after updating preps list
+DROP TABLE IF EXISTS pieces;
+
+CREATE TABLE pieces (
+    PieceCID   TEXT PRIMARY KEY,
+    PieceSize  BIGINT,
+    RootCID    TEXT,
+    FileSize   BIGINT,
+    StorageID  BIGINT REFERENCES storages(StorageID),
+    PrepID     BIGINT REFERENCES preparations(PrepID),
+    IsDag      BOOLEAN
+);
 
 DROP TABLE IF EXISTS pieces_staging;
 
-
 CREATE TABLE pieces_staging (
-    PieceCID    TEXT NOT NULL,
-    PieceSize   BIGINT NOT NULL,
-    RootCID     TEXT NOT NULL,
-    FileSize    BIGINT NOT NULL,
-    StorageID   BIGINT NOT NULL,
-    PrepID      BIGINT NOT NULL,
-    IsDag       BOOLEAN NOT NULL
+    PieceCID   TEXT PRIMARY KEY,
+    PieceSize  BIGINT,
+    RootCID    TEXT,
+    FileSize   BIGINT,
+    StorageID  BIGINT,
+    PrepID     BIGINT,
+    IsDag      BOOLEAN
 );
 
---run db_piece_report.sh
+-- \copy pieces_staging FROM '/Users/brianeggert/workscripts/postgres/pieces_flat.csv' WITH (FORMAT csv, HEADER true)
 
-/*
-\copy pieces_staging (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag) FROM '/Users/brianeggert/workscripts/postgres/pieces.csv' WITH (FORMAT csv, HEADER true)
-*/
-
-INSERT INTO pieces
-SELECT *
-FROM pieces_staging
-ON CONFLICT (PieceCID, PrepID, StorageID) DO NOTHING;
-
-
--- check which rows were excluded
-SELECT ps.*
-FROM pieces_staging ps
-LEFT JOIN pieces p
-  ON ps.PieceCID  = p.PieceCID
- AND ps.PrepID    = p.PrepID
- AND ps.StorageID = p.StorageID
-WHERE p.PieceCID IS NOT NULL;
+INSERT INTO pieces (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag)
+SELECT * FROM pieces_staging;
