@@ -12,18 +12,42 @@ CREATE TABLE deals (
     ClientID     VARCHAR(50) NOT NULL
 );
 
+-- run refreshdeallist.sh for deallist_clean.csv removing <nil> ids
 
--- use existing refreshdeallist.sh to compile master list of 3 providers
--- use cleanlist.sh to remove <nil> deal IDs
+DROP TABLE IF EXISTS deals_staging;
 
---don't remember why I couldn't make this work from inside the existing psql session
-/*
-psql "host=onchain-analytics.cdzlqpobahpk.us-east-2.rds.amazonaws.com port=5432 user=brian dbname=analytics sslmode=verify-full sslrootcert=$HOME/.rds-us-east-2.pem" \
--c "\copy deals (DealID, State, Provider, PieceCID, PieceSize, StartEpoch, Price, Verified, ClientID) \
-    FROM '/Users/brianeggert/deallist_clean.tsv' \
-    WITH (FORMAT csv, DELIMITER E'\t', HEADER true, NULL '<nil>')"
+CREATE TABLE deals_staging (
+    DealID       BIGINT,
+    State        VARCHAR(50),
+    Provider     VARCHAR(50),
+    PieceCID     TEXT,
+    PieceSize    BIGINT,
+    StartEpoch   BIGINT,
+    Price        BIGINT,
+    Verified     BOOLEAN,
+    ClientID     VARCHAR(50)
+);
+
+/* 
+-- copy command must be run in psql session
+\copy deals_staging (DealID, State, Provider, PieceCID, PieceSize, StartEpoch, Price, Verified, ClientID) FROM '/Users/brianeggert/workscripts/deallist/deallist_clean.csv' WITH (FORMAT csv, HEADER true, NULL '<nil>');
 */
 
+INSERT INTO deals
+SELECT * FROM deals_staging
+ON CONFLICT (DealID) DO NOTHING;
+
+-- optionally check omitted deals
+SELECT s.*
+FROM deals_staging s
+LEFT JOIN deals d ON s.DealID = d.DealID
+WHERE d.DealID IS NULL;
+\copy deals_staging (DealID, State, Provider, PieceCID, PieceSize, StartEpoch, Price, Verified, ClientID) \
+  FROM '/Users/brianeggert/workscripts/deallist/deallist_clean.tsv' \
+  WITH (FORMAT csv, DELIMITER E'\t', HEADER true, NULL '<nil>')
+
+--n.b. deals_full table is from lotus join not daily refresh
+    
 --CLIENTS
 
 CREATE TABLE clients (
