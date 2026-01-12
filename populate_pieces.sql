@@ -1,3 +1,5 @@
+--do this after updating preps list
+
 DROP TABLE IF EXISTS pieces_staging;
 
 
@@ -11,9 +13,11 @@ CREATE TABLE pieces_staging (
     IsDag       BOOLEAN NOT NULL
 );
 
+--run db_piece_report.sh
 
+/*
 \copy pieces_staging (PieceCID, PieceSize, RootCID, FileSize, StorageID, PrepID, IsDag) FROM '/Users/brianeggert/workscripts/postgres/pieces.csv' WITH (FORMAT csv, HEADER true)
-
+*/
 
 INSERT INTO pieces
 SELECT *
