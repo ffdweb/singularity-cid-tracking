@@ -4,3 +4,13 @@ Very rough working-inpublic scratch space for tracking FFDW data uploading proje
 
 Feel free to email ian@fil.org with any questions
 
+---
+
+ETL Steps in this order
+
+Manual: Clients, Providers
+
+1) Storages
+2) Preps
+3) Pieces
+4) Deals
