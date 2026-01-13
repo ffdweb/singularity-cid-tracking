@@ -14,5 +14,6 @@ Manual: Clients, Providers
 2) Preps
 3) Pieces
 4) Deals
+5) Contents
 
 disambiguating: "items" pulled from ia search or CLI. "contents" pulled from singularity storage explore by parsing _meta.xml file names
