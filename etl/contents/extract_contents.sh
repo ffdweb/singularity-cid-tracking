@@ -1,7 +1,7 @@
 #!/bin/bash
 
-START=500
-END=1000
+START=399
+END=405
 OUTFILE="storage-contents.csv"
 
 echo "storageid,identifier" > "$OUTFILE"
