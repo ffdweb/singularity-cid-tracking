@@ -14,7 +14,7 @@ CREATE UNLOGGED TABLE contents_staging (
 );
 
 /*
-\copy contents_staging FROM '/Users/brianeggert/ffpostgres/singularity-cid-tracking/etl/contents/storage-contents.csv' WITH (FORMAT csv, HEADER true);
+\copy contents_staging FROM '/Users/brianeggert/ffpostgres/singularity-cid-tracking/etl/contents/storage-contents-copy.csv' WITH (FORMAT csv, HEADER true);
 */
 
 INSERT INTO contents (storageid, identifier)
