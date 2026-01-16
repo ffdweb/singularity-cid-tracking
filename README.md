@@ -7,6 +7,7 @@ Feel free to email ian@fil.org with any questions
 ---
 
 Internal db schema:
+```
 table_name          type   has_sql
 ------------------  -----  -------
 car_blocks          table  1      -flatten to pieces
@@ -25,6 +26,7 @@ storages            table  1      -flatten to storages
 wallet_assignments  table  1      -disregard
 wallets             table  1      -"clients"
 workers             table  1      -disregard
+```
 
 ---
 
