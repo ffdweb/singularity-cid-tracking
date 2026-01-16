@@ -1,4 +1,6 @@
 -- ITEMS
+-- rework this. items should come from IA search by collection. pieces and packed sizes should come from preparations table.
+-- columns should be identifier, collection, union coming from collection mapping and union mapping in item mapping schema
 
 CREATE TABLE IF NOT EXISTS items (
     Identifier     TEXT PRIMARY KEY,                 -- IA item identifier
