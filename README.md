@@ -6,7 +6,7 @@ Feel free to email ian@fil.org with any questions
 
 ---
 
-Internal db schema:
+Internal db schema to simplify:
 ```
 table_name          type   has_sql
 ------------------  -----  -------
