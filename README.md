@@ -31,6 +31,7 @@ workers             table  1      -disregard
 ---
 
 Tracking Tables:
+```
 storages* (specifically source storages) - daily import via script and staging table
 preps - daily import via script and staging table
 pieces - daily import via script and staging table
@@ -39,6 +40,7 @@ items* - import once per IA collection at time of packing from ia search results
 contents - import once packing is complete to cross reference contents
 clients - create once, update if needed
 providers - create once, update if needed
+```
 
 *disambiguating: only interested in source storages for our use case
 *disambiguating: "items" pulled from ia search CLI. "contents" pulled from singularity storage explore by parsing _meta.xml file names
