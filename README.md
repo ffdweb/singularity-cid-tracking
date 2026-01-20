@@ -6,21 +6,41 @@ Feel free to email ian@fil.org with any questions
 
 ---
 
-ETL Steps in this order
+Internal db schema to simplify:
+```
+table_name          type   has_sql
+------------------  -----  -------
+car_blocks          table  1      -flatten to pieces
+cars                table  1      -flatten to pieces
+deals               table  1      -keep
+directories         table  1      -flatten to contents
+file_ranges         table  1      -disregard
+files               table  1      -flatten to contents
+globals             table  1      -disregard
+jobs                table  1      -disregard
+output_attachments  table  1      -disregard
+preparations        table  1      -keep
+schedules           table  1      -disregard
+source_attachments  table  1      -flatten to storages
+storages            table  1      -flatten to storages
+wallet_assignments  table  1      -disregard
+wallets             table  1      -"clients"
+workers             table  1      -disregard
+```
 
-Manual: Clients, Providers
+---
 
-1) Storages
-2) Preps
-3) Pieces
-4) Deals
-5) Contents
+Tracking Tables:
+```
+storages* (specifically source storages) - daily import via script and staging table
+preps - daily import via script and staging table
+pieces - daily import via script and staging table
+deals - daily import via script and staging table
+items* - import once per IA collection at time of packing from ia search results
+contents - import once packing is complete to cross reference contents
+clients - create once, update if needed
+providers - create once, update if needed
+```
 
-disambiguating: "items" pulled from ia search or CLI. "contents" pulled from singularity storage explore by parsing _meta.xml file names
-
-
-<img width="484" height="458" alt="Screenshot 2026-01-13 at 21 49 02" src="https://github.com/user-attachments/assets/9e692432-7a6f-4017-946e-f9b8596f8126" />
-
-<img width="473" height="289" alt="Screenshot 2026-01-13 at 21 49 11" src="https://github.com/user-attachments/assets/69b02f22-eccc-41bf-b5c9-282f4d9df768" />
-
-<img width="687" height="190" alt="Screenshot 2026-01-13 at 21 50 22" src="https://github.com/user-attachments/assets/c2e9fcce-8e58-4080-a5c8-78633492a0e6" />
+*disambiguating: only interested in source storages for our use case
+*disambiguating: "items" pulled from ia search CLI. "contents" pulled from singularity storage explore by parsing _meta.xml file names
