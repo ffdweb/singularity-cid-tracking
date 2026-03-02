@@ -1,6 +1,6 @@
 /* if starting fresh
 
-DROP TABLE IF EXISTS storages;
+DROP TABLE IF EXISTS storages CASCADE;
 
 CREATE TABLE IF NOT EXISTS storages (
     StorageID   BIGINT PRIMARY KEY,

@@ -1,0 +1,6 @@
+.DS_Store
+etl/singularity_raw_dumps/remaining_files.sql
+etl/singularity_raw_dumps/remaining_files_2.sql
+etl/singularity_raw_dumps/remaining_files_3.sql
+etl/singularity_raw_dumps/singularity_raw_files.sql
+etl/singularity_raw_dumps/singularity_raw_storages_dump.sql

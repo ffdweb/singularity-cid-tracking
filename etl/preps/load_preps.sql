@@ -1,6 +1,6 @@
 /* if starting fresh
 
-DROP TABLE IF EXISTS preparations;
+DROP TABLE IF EXISTS preparations CASCADE;
 
 CREATE TABLE IF NOT EXISTS preparations (
     PrepID     BIGINT PRIMARY KEY,
