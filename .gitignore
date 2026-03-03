@@ -14,4 +14,5 @@ etl/pieces/pieces_flat.csv
 etl/preps/preps_flat.csv
 etl/storages/storages_flat.csv
 etl/contents/storage-contents-copy.csv
+etl/contents/storage-contents.csv
 lotus/deals_full.csv
