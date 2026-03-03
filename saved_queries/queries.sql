@@ -97,3 +97,17 @@ WHERE df.client = 'f02208630'
   AND df.endepoch > 0  -- Filter out slashed or invalid deals
 GROUP BY p.prepid, p.name
 ORDER BY p.prepid;
+
+
+-- deal coverage check: all active t/f by provider for all preparations
+
+SELECT
+    p.prepid,
+    COUNT(DISTINCT p.piececid) AS total_pieces,
+    COUNT(DISTINCT CASE WHEN d.provider = 'f02011071' AND d.state = 'active' THEN p.piececid END) = COUNT(DISTINCT p.piececid) AS all_f02011071,
+    COUNT(DISTINCT CASE WHEN d.provider = 'f02639429' AND d.state = 'active' THEN p.piececid END) = COUNT(DISTINCT p.piececid) AS all_f02639429,
+    COUNT(DISTINCT CASE WHEN d.provider = 'f03468521' AND d.state = 'active' THEN p.piececid END) = COUNT(DISTINCT p.piececid) AS all_f03468521
+FROM pieces p
+LEFT JOIN deals d ON d.piececid = p.piececid
+GROUP BY p.prepid
+ORDER BY p.prepid;

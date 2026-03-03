@@ -1,6 +1,17 @@
 .DS_Store
+
+# Large/sensitive SQL dumps
 etl/singularity_raw_dumps/remaining_files.sql
 etl/singularity_raw_dumps/remaining_files_2.sql
 etl/singularity_raw_dumps/remaining_files_3.sql
 etl/singularity_raw_dumps/singularity_raw_files.sql
 etl/singularity_raw_dumps/singularity_raw_storages_dump.sql
+
+# Generated CSV exports (derived from flatten scripts)
+etl/deals/deallist.txt
+etl/deals/deallist_clean.csv
+etl/pieces/pieces_flat.csv
+etl/preps/preps_flat.csv
+etl/storages/storages_flat.csv
+etl/contents/storage-contents-copy.csv
+lotus/deals_full.csv
