@@ -1,4 +1,5 @@
 .DS_Store
+CLAUDE.md
 
 # Large/sensitive SQL dumps
 etl/singularity_raw_dumps/remaining_files.sql
