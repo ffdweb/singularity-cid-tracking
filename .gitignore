@@ -1,7 +1,7 @@
 .DS_Store
 CLAUDE.md
 
-# Large/sensitive SQL dumps
+# Large SQL dumps
 etl/singularity_raw_dumps/remaining_files.sql
 etl/singularity_raw_dumps/remaining_files_2.sql
 etl/singularity_raw_dumps/remaining_files_3.sql
